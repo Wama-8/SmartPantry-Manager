@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SmartPanter_Manager"
+rootProject.name = "SmartPantry_Manager"
 include ':app'
