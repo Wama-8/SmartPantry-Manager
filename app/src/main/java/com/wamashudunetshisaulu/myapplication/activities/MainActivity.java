@@ -1,8 +1,10 @@
-package com.wamashudunetshisaulu.myapplication;
+package com.wamashudunetshisaulu.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.wamashudunetshisaulu.myapplication.R;
 
 public class MainActivity extends AppCompatActivity {
 
