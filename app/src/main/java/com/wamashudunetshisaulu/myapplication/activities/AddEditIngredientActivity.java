@@ -31,6 +31,8 @@ public class AddEditIngredientActivity extends AppCompatActivity {
     /** Units offered in the spinner. They all map to safe conversions in UnitConverter. */
     private static final String[] UNITS = {"g", "kg", "ml", "l", "tsp", "tbsp", "cup", "pcs", "slice", "clove"};
 
+    private static final String STATE_EXPIRY = "state_expiry_iso";
+
     private DatabaseHelper db;
     private long editId = -1;
     private String expiryIso; // null = no expiry date
@@ -66,15 +68,25 @@ public class AddEditIngredientActivity extends AppCompatActivity {
                 return;
             }
             title.setText("Edit Ingredient");
-            nameInput.setText(item.getName());
-            quantityInput.setText(QuantityFormat.number(item.getQuantity()));
-            for (int i = 0; i < UNITS.length; i++) {
-                if (UNITS[i].equalsIgnoreCase(item.getUnit())) unitSpinner.setSelection(i);
+            // After a rotation Android restores the typed text itself; only fill from the
+            // database on the first creation so the user's unsaved edits are not overwritten.
+            if (savedInstanceState == null) {
+                nameInput.setText(item.getName());
+                quantityInput.setText(QuantityFormat.number(item.getQuantity()));
+                for (int i = 0; i < UNITS.length; i++) {
+                    if (UNITS[i].equalsIgnoreCase(item.getUnit())) unitSpinner.setSelection(i);
+                }
+                expiryIso = item.getExpiryDate();
+                expiryInput.setText(expiryIso == null ? "" : expiryIso);
             }
-            expiryIso = item.getExpiryDate();
-            expiryInput.setText(expiryIso == null ? "" : expiryIso);
         } else {
             title.setText("Add Ingredient");
+        }
+
+        // Restore the chosen expiry date after rotation (the field text survives, the variable does not).
+        if (savedInstanceState != null) {
+            expiryIso = savedInstanceState.getString(STATE_EXPIRY);
+            expiryInput.setText(expiryIso == null ? "" : expiryIso);
         }
 
         expiryInput.setOnClickListener(v -> showDatePicker());
@@ -84,6 +96,12 @@ public class AddEditIngredientActivity extends AppCompatActivity {
         });
         findViewById(R.id.btnSave).setOnClickListener(v -> save());
         findViewById(R.id.btnCancel).setOnClickListener(v -> finish());
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_EXPIRY, expiryIso);
     }
 
     private void showDatePicker() {
