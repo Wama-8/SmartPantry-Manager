@@ -1,7 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.SmartPanter_Manager" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <!-- Light-only theme so the cream/green design looks the same on every device. -->
+    <style name="Base.Theme.SmartPanter_Manager" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/pantry_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/pantry_green_light</item>
+        <item name="colorOnPrimaryContainer">@color/pantry_green_dark</item>
+        <item name="colorSecondary">@color/pantry_terracotta</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/pantry_green_light</item>
+        <item name="colorOnSecondaryContainer">@color/pantry_green_dark</item>
+        <item name="colorSurface">@color/pantry_cream</item>
+        <item name="colorOnSurface">@color/pantry_ink</item>
+        <item name="colorOnSurfaceVariant">@color/pantry_muted</item>
+        <item name="colorOutline">@color/pantry_outline_strong</item>
+        <item name="colorError">@color/pantry_danger</item>
+        <item name="android:colorBackground">@color/pantry_cream</item>
+        <item name="android:statusBarColor">@color/pantry_green</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Pantry.Medium</item>
     </style>
+
+    <style name="Theme.SmartPanter_Manager" parent="Base.Theme.SmartPanter_Manager" />
 </resources>
