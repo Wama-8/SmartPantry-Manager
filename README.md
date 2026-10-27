@@ -11,13 +11,15 @@ Repository: https://github.com/Wama-8/SmartPantry-Manager
 
 ## Features
 
-- **Pantry List** – shows all stored ingredients in a RecyclerView with a custom adapter. Items close to expiry are highlighted.
-- **Add / Edit Ingredient** – name, quantity, unit and an optional expiry date, with validation messages next to the fields.
-- **Delete** – removes an ingredient after a confirmation dialog.
+- **Pantry List** – shows all stored ingredients as cards in a RecyclerView with a custom adapter. Items close to expiry are highlighted, and ingredients that no recipe uses carry a "Custom" tag.
+- **Add / Edit Ingredient** – name, quantity, unit (dropdown) and an optional expiry date, with validation messages next to the fields. The name field suggests ingredients used by the recipes, but any ingredient can be typed (custom ingredients).
+- **Delete** – swipe a card away or tap the bin; a Snackbar offers Undo.
+- **Bottom navigation** – switch between Pantry, Recipes and Settings.
 - **Suggested Recipes** – lists only recipes that can be fully prepared with the current pantry.
 - **Recipe Detail** – shows the recipe's ingredients with quantities and its preparation steps.
 - **Settings** – choose how many days before expiry an item is highlighted (3, 7 or 14). The choice is stored in SharedPreferences.
 - 20 seed recipes are inserted once, the first time the database is created.
+- Adaptive app icon (jar and leaf), including a themed monochrome version.
 
 ## Strict recipe matching
 
@@ -28,6 +30,12 @@ A recipe appears in Suggested Recipes **only** when:
 3. ingredient names match after normalisation (case, extra spaces, simple plurals such as "tomatoes" and "tomato").
 
 If one ingredient is missing or short, the recipe is excluded. There are no partial matches.
+
+### Custom ingredients
+
+Users can add their own ingredients, for example "Dragon fruit". They are stored in the pantry like any other item,
+but suggestions are always taken **only from the recipe database**: the app never invents or generates recipes.
+A custom ingredient therefore never changes the suggestions unless a database recipe uses it.
 
 Unit conversion is deliberately conservative (`UnitConverter.java`):
 
@@ -65,8 +73,11 @@ app/src/main/java/com/wamashudunetshisaulu/myapplication/
   database/     DatabaseHelper, SeedRecipes
   matching/     RecipeMatcher, UnitConverter
   models/       PantryItem, Recipe, RecipeIngredient
-  utils/        IngredientNormalizer, InputValidator, DateUtils, QuantityFormat, AppPrefs
+  utils/        IngredientNormalizer, IngredientCatalog, InputValidator, DateUtils, QuantityFormat,
+                AppPrefs, TextFormat, StepParser
+  (activities/BottomNav is the shared bottom navigation)
 app/src/main/res/layout/   XML layouts for each screen and list item
+app/src/main/res/values/   colours, styles and themes (ui_extras.xml holds the extra UI colours and styles)
 app/src/test/              unit tests (matching and utilities)
 ```
 
@@ -95,9 +106,28 @@ Right-click `app/src/test` in the Project view and choose **Run Tests**, or run 
 
 ### Quick demo
 
+(Add your own ingredient too, e.g. Dragon fruit 2 pcs: it appears with a "Custom" tag and does not change the suggestions.)
+
 1. Add: Egg 6 pcs, Milk 500 ml, Butter 100 g, Bread 4 slice, Cheese 100 g.
 2. Open **Suggested Recipes**: recipes that can be fully made from these ingredients appear.
 3. Delete Cheese, or lower the Butter quantity, and open Suggested Recipes again: recipes that need more than you have disappear.
+
+## Testing
+
+**Unit tests** (`app/src/test`) cover the strict matcher (missing, short and exact quantities, unit conversion, plural names,
+duplicate pantry rows), input validation, text helpers, and custom ingredients (a custom pantry item never changes the suggestions).
+
+**Manual checklist (emulator):**
+
+1. The app drawer shows the jar-and-leaf icon.
+2. Add "Cheese": the hint says it is used in N recipes and no "Custom" tag appears in the list.
+3. Add "Dragon fruit" 2 pcs: the hint says it is a custom ingredient, the list shows a "Custom" tag and Recipes does not change.
+4. Add every ingredient of one seed recipe in enough quantity: it appears in Recipes, and its detail screen shows ingredients and numbered steps.
+5. Lower one quantity below what the recipe needs: the recipe disappears.
+6. Swipe an item away: a Snackbar offers Undo and Undo restores it.
+7. Edit an item, pick an expiry date and rotate the phone: the date and unit are kept.
+8. In Settings choose 3, 7 or 14 days: the expiry pills in the pantry follow the choice.
+9. Delete everything: both empty states appear and their buttons work.
 
 ## Out of scope
 
