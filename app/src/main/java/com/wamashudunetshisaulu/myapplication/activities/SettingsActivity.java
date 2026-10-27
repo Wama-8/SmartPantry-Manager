@@ -1,11 +1,12 @@
 package com.wamashudunetshisaulu.myapplication.activities;
 
 import android.os.Bundle;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.ChipGroup;
 import com.wamashudunetshisaulu.myapplication.R;
 import com.wamashudunetshisaulu.myapplication.utils.AppPrefs;
 
@@ -15,22 +16,32 @@ import com.wamashudunetshisaulu.myapplication.utils.AppPrefs;
  */
 public class SettingsActivity extends AppCompatActivity {
 
+    private TextView hint;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        hint = findViewById(R.id.tvWarnHint);
 
-        RadioGroup group = findViewById(R.id.rgWarnDays);
+        ChipGroup group = findViewById(R.id.cgWarnDays);
         int days = AppPrefs.getExpiryWarningDays(this);
-        int checkedId = days == 7 ? R.id.rb7 : days == 14 ? R.id.rb14 : R.id.rb3;
-        ((RadioButton) findViewById(checkedId)).setChecked(true);
+        group.check(days == 7 ? R.id.chip7 : days == 14 ? R.id.chip14 : R.id.chip3);
+        showHint(days);
 
         // Saved immediately when the user picks an option.
-        group.setOnCheckedChangeListener((g, id) -> {
-            int value = id == R.id.rb7 ? 7 : id == R.id.rb14 ? 14 : 3;
+        group.setOnCheckedStateChangeListener((g, checkedIds) -> {
+            if (checkedIds.isEmpty()) return;
+            int id = checkedIds.get(0);
+            int value = id == R.id.chip7 ? 7 : id == R.id.chip14 ? 14 : 3;
             AppPrefs.setExpiryWarningDays(this, value);
+            showHint(value);
         });
 
-        findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        BottomNav.setup(this, (BottomNavigationView) findViewById(R.id.bottomNav), R.id.nav_settings);
+    }
+
+    private void showHint(int days) {
+        hint.setText("Items expiring within " + days + " days are highlighted on your pantry.");
     }
 }

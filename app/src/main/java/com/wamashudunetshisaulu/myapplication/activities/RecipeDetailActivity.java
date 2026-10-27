@@ -1,6 +1,9 @@
 package com.wamashudunetshisaulu.myapplication.activities;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +14,10 @@ import com.wamashudunetshisaulu.myapplication.database.DatabaseHelper;
 import com.wamashudunetshisaulu.myapplication.models.Recipe;
 import com.wamashudunetshisaulu.myapplication.models.RecipeIngredient;
 import com.wamashudunetshisaulu.myapplication.utils.QuantityFormat;
+import com.wamashudunetshisaulu.myapplication.utils.StepParser;
+import com.wamashudunetshisaulu.myapplication.utils.TextFormat;
+
+import java.util.List;
 
 /** Screen 4: Recipe Detail. Receives EXTRA_RECIPE_ID through an explicit Intent. */
 public class RecipeDetailActivity extends AppCompatActivity {
@@ -33,12 +40,29 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.tvDetailName)).setText(recipe.getName());
 
-        StringBuilder sb = new StringBuilder();
-        for (RecipeIngredient i : recipe.getIngredients()) {
-            sb.append("• ").append(i.getName()).append(": ")
-              .append(QuantityFormat.amount(i.getQuantity(), i.getUnit())).append('\n');
+        List<String> steps = StepParser.split(recipe.getInstructions());
+        ((TextView) findViewById(R.id.tvDetailMeta)).setText(
+                TextFormat.count(recipe.getIngredients().size(), "ingredient", "ingredients")
+                        + " · " + TextFormat.count(steps.size(), "step", "steps"));
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        LinearLayout ingredients = findViewById(R.id.llIngredients);
+        List<RecipeIngredient> list = recipe.getIngredients();
+        for (int n = 0; n < list.size(); n++) {
+            RecipeIngredient i = list.get(n);
+            View row = inflater.inflate(R.layout.item_ingredient_row, ingredients, false);
+            ((TextView) row.findViewById(R.id.tvIngName)).setText(TextFormat.capitalize(i.getName()));
+            ((TextView) row.findViewById(R.id.tvIngAmount)).setText(QuantityFormat.amount(i.getQuantity(), i.getUnit()));
+            if (n == list.size() - 1) row.findViewById(R.id.vDivider).setVisibility(View.GONE);
+            ingredients.addView(row);
         }
-        ((TextView) findViewById(R.id.tvDetailIngredients)).setText(sb.toString().trim());
-        ((TextView) findViewById(R.id.tvDetailInstructions)).setText(recipe.getInstructions());
+
+        LinearLayout stepsBox = findViewById(R.id.llSteps);
+        for (int n = 0; n < steps.size(); n++) {
+            View row = inflater.inflate(R.layout.item_step, stepsBox, false);
+            ((TextView) row.findViewById(R.id.tvStepNumber)).setText(String.valueOf(n + 1));
+            ((TextView) row.findViewById(R.id.tvStepText)).setText(steps.get(n));
+            stepsBox.addView(row);
+        }
     }
 }

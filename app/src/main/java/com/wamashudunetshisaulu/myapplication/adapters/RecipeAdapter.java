@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.wamashudunetshisaulu.myapplication.R;
 import com.wamashudunetshisaulu.myapplication.models.Recipe;
+import com.wamashudunetshisaulu.myapplication.utils.TextFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +46,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder h, int position) {
         final Recipe r = recipes.get(position);
         h.name.setText(r.getName());
-        int n = r.getIngredients().size();
-        h.summary.setText(n + (n == 1 ? " ingredient" : " ingredients") + " • you have everything");
+        h.summary.setText("Ready \u2022 " + TextFormat.count(r.getIngredients().size(), "ingredient", "ingredients"));
         h.itemView.setOnClickListener(v -> listener.onRecipeClick(r));
     }
 
