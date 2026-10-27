@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,19 +13,20 @@
         android:paddingStart="20dp"
         android:paddingTop="12dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="28dp">
+        android:paddingBottom="24dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Suggested Recipes"
+            android:text="Ready to Cook"
             android:textAppearance="@style/TextAppearance.Pantry.HeaderTitle" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvRecipesSubtitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Only recipes you can fully make with your current pantry."
+            android:text="From our recipe collection, using only what you have"
             android:textAppearance="@style/TextAppearance.Pantry.HeaderSubtitle" />
     </LinearLayout>
 
@@ -38,28 +40,55 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp" />
+            android:padding="16dp" />
 
-        <TextView
-            android:id="@+id/tvNoRecipes"
+        <LinearLayout
+            android:id="@+id/llNoRecipes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:padding="32dp"
-            android:text="🍽️\n\nNo recipes can be made with your pantry right now.\n\nAdd more ingredients or increase quantities, then check again."
-            android:textAppearance="@style/TextAppearance.Pantry.EmptyState"
-            android:visibility="gone" />
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_empty_recipes" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Nothing to cook just yet"
+                android:textAppearance="@style/TextAppearance.Pantry.Serif" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="No recipe can be made with your pantry right now. Add more ingredients or increase quantities, then check again."
+                android:textAppearance="@style/TextAppearance.Pantry.EmptyState" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEmptyPantry"
+                style="@style/Widget.Pantry.Button.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Go to my pantry" />
+        </LinearLayout>
     </FrameLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBack"
-        style="@style/Widget.Pantry.Button.Outlined"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Back to pantry" />
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav" />
 </LinearLayout>

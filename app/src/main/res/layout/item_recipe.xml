@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.Pantry.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,17 +16,19 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <!-- Decorative accent bar -->
-        <View
-            android:layout_width="4dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="14dp"
-            android:background="@drawable/bg_accent_bar"
-            android:importantForAccessibility="no" />
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_icon_tile"
+            android:importantForAccessibility="no"
+            android:padding="14dp"
+            android:src="@drawable/ic_menu_book"
+            app:tint="@color/pantry_green" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -33,14 +36,31 @@
                 android:id="@+id/tvRecipeName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Pantry.CardTitle" />
+                android:fontFamily="serif"
+                android:textColor="@color/pantry_ink"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvRecipeSummary"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textAppearance="@style/TextAppearance.Pantry.Muted" />
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_pill_ok"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="3dp"
+                android:textColor="@color/pantry_green_dark"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/pantry_muted" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

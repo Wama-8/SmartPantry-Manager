@@ -1,0 +1,46 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="160dp"
+    android:height="160dp"
+    android:viewportWidth="160"
+    android:viewportHeight="160">
+    <!-- soft background disc -->
+    <path
+        android:fillColor="@color/pantry_green_light"
+        android:pathData="M16,84a64,64 0 1,0 128,0a64,64 0 1,0 -128,0z" />
+    <!-- shelf -->
+    <path
+        android:fillColor="@color/pantry_green"
+        android:pathData="M32,118h96a3,3 0 0 1 3,3v3a3,3 0 0 1 -3,3h-96a3,3 0 0 1 -3,-3v-3a3,3 0 0 1 3,-3z" />
+    <!-- large jar -->
+    <path
+        android:fillColor="@color/white"
+        android:strokeColor="@color/pantry_green"
+        android:strokeWidth="3"
+        android:pathData="M58,68h28a6,6 0 0 1 6,6v36a8,8 0 0 1 -8,8h-24a8,8 0 0 1 -8,-8v-36a6,6 0 0 1 6,-6z" />
+    <path
+        android:fillColor="@color/pantry_honey"
+        android:pathData="M60,57h24a2,2 0 0 1 2,2v7h-28v-7a2,2 0 0 1 2,-2z" />
+    <path
+        android:fillColor="@color/pantry_cream_dark"
+        android:pathData="M60,86h24a3,3 0 0 1 3,3v10a3,3 0 0 1 -3,3h-24a3,3 0 0 1 -3,-3v-10a3,3 0 0 1 3,-3z" />
+    <!-- leaf on the jar label -->
+    <path
+        android:fillColor="@color/pantry_green"
+        android:pathData="M72,98c-7,-1 -10,-6 -9,-11c6,0 10,3 11,8c0,1 -0.5,2 -1,3c-0.2,-3 -1,-5 -3,-6c1.5,2 2,4 2,6z" />
+    <!-- small jar -->
+    <path
+        android:fillColor="@color/pantry_terracotta_light"
+        android:strokeColor="@color/pantry_terracotta"
+        android:strokeWidth="3"
+        android:pathData="M102,92h14a4,4 0 0 1 4,4v14a8,8 0 0 1 -8,8h-6a8,8 0 0 1 -8,-8v-14a4,4 0 0 1 4,-4z" />
+    <path
+        android:fillColor="@color/pantry_terracotta"
+        android:pathData="M103,84h12a1.5,1.5 0 0 1 1.5,1.5v6.5h-15v-6.5a1.5,1.5 0 0 1 1.5,-1.5z" />
+    <!-- sprig -->
+    <path
+        android:fillColor="@color/pantry_green"
+        android:pathData="M40,104c-7,0 -11,-5 -10,-12c7,-0.5 12,4 12,10z" />
+    <path
+        android:fillColor="@color/pantry_honey"
+        android:pathData="M44,112c-5,1 -9,-2 -10,-7c5,-1.5 9,0.5 10,7z" />
+</vector>

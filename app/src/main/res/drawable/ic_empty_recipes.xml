@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="160dp"
+    android:height="160dp"
+    android:viewportWidth="160"
+    android:viewportHeight="160">
+    <path
+        android:fillColor="@color/pantry_green_light"
+        android:pathData="M16,84a64,64 0 1,0 128,0a64,64 0 1,0 -128,0z" />
+    <!-- bowl -->
+    <path
+        android:fillColor="@color/white"
+        android:strokeColor="@color/pantry_green"
+        android:strokeWidth="3"
+        android:pathData="M42,86h76c0,24 -17,40 -38,40s-38,-16 -38,-40z" />
+    <path
+        android:fillColor="@color/pantry_terracotta_light"
+        android:pathData="M45,92h70c-1.5,18 -15,30 -35,30s-33.5,-12 -35,-30z" />
+    <path
+        android:fillColor="@color/pantry_green"
+        android:pathData="M36,84h88a3,3 0 0 1 3,3a3,3 0 0 1 -3,3h-88a3,3 0 0 1 -3,-3a3,3 0 0 1 3,-3z" />
+    <!-- steam -->
+    <path
+        android:strokeColor="@color/pantry_honey"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M64,70c-5,-6 5,-10 0,-17" />
+    <path
+        android:strokeColor="@color/pantry_honey"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M80,70c-5,-6 5,-10 0,-17" />
+    <path
+        android:strokeColor="@color/pantry_honey"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M96,70c-5,-6 5,-10 0,-17" />
+    <!-- garnish -->
+    <path
+        android:fillColor="@color/pantry_green"
+        android:pathData="M72,104c-6,0 -9,-4 -8,-9c6,-0.5 10,3 10,8z" />
+    <path
+        android:fillColor="@color/pantry_terracotta"
+        android:pathData="M92,100a4,4 0 1,0 8,0a4,4 0 1,0 -8,0z" />
+</vector>

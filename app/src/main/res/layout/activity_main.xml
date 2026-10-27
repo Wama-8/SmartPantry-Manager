@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,90 +11,119 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Green header band -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_header"
-            android:orientation="vertical"
-            android:paddingStart="20dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="28dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Pantry"
-                android:textAppearance="@style/TextAppearance.Pantry.HeaderTitle" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Cook with what you already have"
-                android:textAppearance="@style/TextAppearance.Pantry.HeaderSubtitle" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSuggested"
-                    style="@style/Widget.Pantry.Button.OnHeader"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:text="Suggested Recipes" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSettings"
-                    style="@style/Widget.Pantry.Button.OnHeaderOutlined"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Settings" />
-            </LinearLayout>
-        </LinearLayout>
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPantry"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingStart="16dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="96dp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="32dp"
-                android:text="🥕\n\nYour pantry is empty.\nTap “Add ingredient” to get started."
-                android:textAppearance="@style/TextAppearance.Pantry.EmptyState"
-                android:visibility="gone" />
-        </FrameLayout>
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:contentDescription="Add ingredient"
-        android:text="Add ingredient"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/pantry_terracotta" />
-</FrameLayout>
+        android:background="@drawable/bg_header"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="24dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Pantry"
+                        android:textAppearance="@style/TextAppearance.Pantry.HeaderTitle" />
+
+                    <TextView
+                        android:id="@+id/tvSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Cook with what you already have"
+                        android:textAppearance="@style/TextAppearance.Pantry.HeaderSubtitle" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPantry"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingStart="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="96dp" />
+
+                    <LinearLayout
+                        android:id="@+id/llEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="32dp"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_empty_pantry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="Your pantry is empty"
+                            android:textAppearance="@style/TextAppearance.Pantry.Serif" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="Add what is in your kitchen, including your own ingredients, and we will suggest recipes you can cook right now."
+                            android:textAppearance="@style/TextAppearance.Pantry.EmptyState" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnEmptyAdd"
+                            style="@style/Widget.Pantry.Button.Primary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:paddingStart="24dp"
+                            android:paddingEnd="24dp"
+                            android:text="Add your first ingredient" />
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/fabAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:contentDescription="Add ingredient"
+                android:text="Add ingredient"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/pantry_terracotta"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/white" />
+        </FrameLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav" />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
